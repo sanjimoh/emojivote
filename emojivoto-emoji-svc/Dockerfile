@@ -1,5 +1,5 @@
 # go build stage
-FROM --platform=$BUILDPLATFORM golang:1.15.0 as golang
+FROM golang:1.15.0 as golang
 WORKDIR /emojivoto-build
 
 # install protobuf
@@ -16,7 +16,7 @@ ARG TARGETARCH
 RUN GOARCH=$TARGETARCH make -C emojivoto-emoji-svc clean protoc compile
 
 # webpack stage
-FROM --platform=$BUILDPLATFORM node:14-buster as webpack-bundle
+FROM node:14-buster as webpack-bundle
 WORKDIR /emojivoto-build
 COPY . .
 RUN make -C emojivoto-emoji-svc clean webpack package-web
