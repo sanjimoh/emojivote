@@ -16,8 +16,6 @@ COPY . .
 ARG TARGETARCH
 RUN GOARCH=$TARGETARCH make clean protoc compile
 
-FROM build-emojivoto-voting-svc as build
-
 # runtime image
 FROM debian:buster-20200514-slim
 RUN apt-get update \
