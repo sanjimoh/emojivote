@@ -29,7 +29,7 @@ RUN apt-get update \
         nghttp2 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /emojivoto-build/emojivoto-voting-svc/target/ /usr/local/bin/
+COPY --from=build /emojivoto-build/target/ /usr/local/bin/
 
 # ARG variables are not available for ENTRYPOINT
 ENV SVC_NAME emojivoto-voting-svc

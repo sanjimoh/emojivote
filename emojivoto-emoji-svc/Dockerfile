@@ -14,7 +14,7 @@ RUN go mod download
 # compile
 COPY . .
 ARG TARGETARCH
-RUN GOARCH=$TARGETARCH make -C emojivoto-emoji-svc clean protoc compile
+RUN GOARCH=$TARGETARCH make clean protoc compile
 
 FROM build-emojivoto-emoji-svc as build
 
@@ -29,7 +29,7 @@ RUN apt-get update \
         nghttp2 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /emojivoto-build/emojivoto-emoji-svc/target/ /usr/local/bin/
+COPY --from=build /emojivoto-build/target/ /usr/local/bin/
 
 # ARG variables are not available for ENTRYPOINT
 ENV SVC_NAME emojivoto-emoji-svc
