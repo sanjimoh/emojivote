@@ -37,7 +37,8 @@ steps:
         'image',
         'deployment',
         'web',
-        'web-svc=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}'
+        'web-svc=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}',
+        '-nemojivoto'
     ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
@@ -50,7 +51,8 @@ steps:
         'image',
         'deployment',
         'emoji',
-        'emoji-svc=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}'
+        'emoji-svc=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}',
+        '-nemojivoto'
     ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
@@ -63,7 +65,8 @@ steps:
         'image',
         'deployment',
         'voting',
-        'voting-svc=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}'
+        'voting-svc=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}',
+        '-nemojivoto'
     ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
