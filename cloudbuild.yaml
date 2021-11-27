@@ -1,24 +1,70 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  id: emojivoto-web Container Build
-  args: ['build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}', 'emojivoto-web/']
+  - name: 'gcr.io/cloud-builders/docker'
+    id: emojivoto-web Container Build
+    args: [ 'build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}', 'emojivoto-web/' ]
 
-- name: 'gcr.io/cloud-builders/docker'
-  id: emojivoto-web Container Push
-  args: ['push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}']
+  - name: 'gcr.io/cloud-builders/docker'
+    id: emojivoto-web Container Push
+    args: [ 'push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}' ]
 
-- name: 'gcr.io/cloud-builders/docker'
-  id: emojivoto-emoji-svc Container Build
-  args: ['build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}', 'emojivoto-emoji-svc/']
+  - name: 'gcr.io/cloud-builders/docker'
+    id: emojivoto-emoji-svc Container Build
+    args: [ 'build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}', 'emojivoto-emoji-svc/' ]
 
-- name: 'gcr.io/cloud-builders/docker'
-  id: emojivoto-emoji-svc Container Push
-  args: ['push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}']
+  - name: 'gcr.io/cloud-builders/docker'
+    id: emojivoto-emoji-svc Container Push
+    args: [ 'push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}' ]
 
-- name: 'gcr.io/cloud-builders/docker'
-  id: emojivoto-voting-svc Container Build
-  args: ['build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}', 'emojivoto-voting-svc/']
+  - name: 'gcr.io/cloud-builders/docker'
+    id: emojivoto-voting-svc Container Build
+    args: [ 'build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}', 'emojivoto-voting-svc/' ]
 
-- name: 'gcr.io/cloud-builders/docker'
-  id: emojivoto-voting-svc Container Push
-  args: ['push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}']
+  - name: 'gcr.io/cloud-builders/docker'
+    id: emojivoto-voting-svc Container Push
+    args: [ 'push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}' ]
+
+  - name: 'gcr.io/cloud-builders/kubectl'
+    id: emojivoto-web pod GKE deploy
+    args: [ 'apply', '-f', 'kustomize/deployment' ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=sanjit-gke-cluster'
+
+  - name: 'gcr.io/cloud-builders/kubectl'
+    id: emojivoto-web pod GKE deploy
+    args: [
+        'set',
+        'image',
+        'deployment',
+        'web',
+        'web-svc=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}'
+    ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=sanjit-gke-cluster'
+
+  - name: 'gcr.io/cloud-builders/kubectl'
+    id: emojivoto-emoji-svc pod GKE deploy
+    args: [
+        'set',
+        'image',
+        'deployment',
+        'emoji',
+        'emoji-svc=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}'
+    ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=sanjit-gke-cluster'
+
+  - name: 'gcr.io/cloud-builders/kubectl'
+    id: emojivoto-voting-svc pod GKE deploy
+    args: [
+        'set',
+        'image',
+        'deployment',
+        'voting',
+        'voting-svc=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}'
+    ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=sanjit-gke-cluster'
