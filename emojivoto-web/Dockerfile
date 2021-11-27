@@ -23,7 +23,7 @@ COPY . .
 RUN make clean webpack package-web
 
 FROM golang as build-emojivoto-web
-COPY --from=webpack-bundle /emojivoto-build/emojivoto-web/target/ /emojivoto-build/emojivoto-web/target/
+COPY --from=webpack-bundle /emojivoto-build/target/ /emojivoto-build/target/
 
 FROM build-emojivoto-web as build
 
@@ -38,7 +38,7 @@ RUN apt-get update \
         nghttp2 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /emojivoto-build/emojivoto-web/target/ /usr/local/bin/
+COPY --from=build /emojivoto-build/target/ /usr/local/bin/
 
 # ARG variables are not available for ENTRYPOINT
 ENV SVC_NAME emojivoto-web
