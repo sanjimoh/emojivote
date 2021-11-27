@@ -11,8 +11,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/buoyantio/emojivoto/emojivoto-voting-svc/api"
-	"github.com/buoyantio/emojivoto/emojivoto-voting-svc/voting"
+	"github.com/sanjimoh/emojivoto/emojivoto-voting-svc/api"
+	"github.com/sanjimoh/emojivoto/emojivoto-voting-svc/voting"
 
 	"contrib.go.opencensus.io/exporter/ocagent"
 	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"

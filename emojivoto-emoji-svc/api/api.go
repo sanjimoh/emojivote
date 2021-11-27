@@ -3,8 +3,8 @@ package api
 import (
 	"context"
 
-	"github.com/buoyantio/emojivoto/emojivoto-emoji-svc/emoji"
-	pb "github.com/buoyantio/emojivoto/emojivoto-emoji-svc/gen/proto"
+	"github.com/sanjimoh/emojivoto/emojivoto-emoji-svc/emoji"
+	pb "github.com/sanjimoh/emojivoto/emojivoto-emoji-svc/gen/proto"
 	"google.golang.org/grpc"
 )
 

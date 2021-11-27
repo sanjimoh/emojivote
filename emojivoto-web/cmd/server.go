@@ -5,12 +5,12 @@ import (
 	"os"
 	"time"
 
-	pb "github.com/sanjimoh/emojivote/emojivoto-web/gen/proto"
-	"github.com/sanjimoh/emojivote/emojivoto-web/web"
-	"google.golang.org/grpc"
 	"contrib.go.opencensus.io/exporter/ocagent"
+	pb "github.com/sanjimoh/emojivoto/emojivoto-web/gen/proto"
+	"github.com/sanjimoh/emojivoto/emojivoto-web/web"
 	"go.opencensus.io/plugin/ocgrpc"
 	"go.opencensus.io/trace"
+	"google.golang.org/grpc"
 )
 
 var (
