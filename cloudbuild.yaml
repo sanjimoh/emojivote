@@ -24,7 +24,7 @@ steps:
     args: [ 'push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}' ]
 
   - name: 'gcr.io/cloud-builders/kubectl'
-    id: emojivoto-web pod GKE deploy
+    id: emojivoto base GKE deploy
     args: [ 'apply', '-f', 'kustomize/deployment' ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
