@@ -21,4 +21,4 @@ steps:
 
 - name: 'gcr.io/cloud-builders/docker'
   id: emojivoto-voting-svc Container Push
-  args: ['push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io}/emojivoto-voting-svc:${SHORT_SHA}']
+  args: ['push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}']
