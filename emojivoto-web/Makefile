@@ -2,7 +2,7 @@ svc_name := emojivoto-web
 
 all: clean protoc webpack package-web test package
 
-include ../common.mk
+include common.mk
 
 webpack:
 	$(MAKE) -C webapp
