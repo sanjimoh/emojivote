@@ -4,7 +4,7 @@ steps:
   args: ['build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/emojivoto-web:${SHORT_SHA}', 'emojivoto-web/']
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: emojivoto-web Container Build
+  id: emojivoto-web Container Push
   args: ['push', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/emojivoto-web:${SHORT_SHA}']
 
 - name: 'gcr.io/cloud-builders/docker'
@@ -12,7 +12,7 @@ steps:
   args: ['build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/emojivoto-emoji-svc:${SHORT_SHA}', 'emojivoto-emoji-svc/']
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: emojivoto-emoji-svc Container Build
+  id: emojivoto-emoji-svc Container Push
   args: ['push', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/emojivoto-emoji-svc:${SHORT_SHA}']
 
 - name: 'gcr.io/cloud-builders/docker'
@@ -20,5 +20,5 @@ steps:
   args: ['build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/emojivoto-voting-svc:${SHORT_SHA}', 'emojivoto-voting-svc/']
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: emojivoto-voting-svc Container Build
+  id: emojivoto-voting-svc Container Push
   args: ['push', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/emojivoto-voting-svc:${SHORT_SHA}']
