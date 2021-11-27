@@ -7,19 +7,19 @@ RUN apt-get update && apt-get install -y protobuf-compiler
 RUN go get github.com/golang/protobuf/protoc-gen-go
 
 # cache go dependencies
-COPY go.mod go.sum .
+COPY ../go.mod ../go.sum .
 RUN go mod download
 
 # compile
 COPY . .
 ARG TARGETARCH
-RUN GOARCH=$TARGETARCH make -C emojivoto-web clean protoc compile
+RUN GOARCH=$TARGETARCH make clean protoc compile
 
 # webpack stage
 FROM node:14-buster as webpack-bundle
 WORKDIR /emojivoto-build
 COPY . .
-RUN make -C emojivoto-web clean webpack package-web
+RUN make clean webpack package-web
 
 FROM golang as build-emojivoto-web
 COPY --from=webpack-bundle /emojivoto-build/emojivoto-web/target/ /emojivoto-build/emojivoto-web/target/

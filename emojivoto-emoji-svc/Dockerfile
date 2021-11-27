@@ -15,15 +15,6 @@ COPY . .
 ARG TARGETARCH
 RUN GOARCH=$TARGETARCH make -C emojivoto-emoji-svc clean protoc compile
 
-# webpack stage
-FROM node:14-buster as webpack-bundle
-WORKDIR /emojivoto-build
-COPY . .
-RUN make -C emojivoto-emoji-svc clean webpack package-web
-
-FROM golang as build-emojivoto-voting-svc
-COPY --from=webpack-bundle /emojivoto-build/emojivoto-emoji-svc/target/ /emojivoto-build/emojivoto-emoji-svc/target/
-
 FROM build-emojivoto-emoji-svc as build
 
 # runtime image
