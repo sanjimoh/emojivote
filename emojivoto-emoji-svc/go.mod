@@ -1,4 +1,4 @@
-module github.com/sanjimoh/emojivoto
+module github.com/sanjimoh/emojivoto/emojivoto-emoji-svc
 
 go 1.13
 
