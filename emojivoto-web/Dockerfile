@@ -1,5 +1,3 @@
-ARG svc_name
-
 # go build stage
 FROM --platform=$BUILDPLATFORM golang:1.15.0 as golang
 WORKDIR /emojivoto-build
@@ -15,8 +13,7 @@ RUN go mod download
 # compile
 COPY . .
 ARG TARGETARCH
-ARG svc_name
-RUN GOARCH=$TARGETARCH make -C $svc_name clean protoc compile
+RUN GOARCH=$TARGETARCH make -C emojivoto-web clean protoc compile
 
 # webpack stage
 FROM --platform=$BUILDPLATFORM node:14-buster as webpack-bundle
@@ -24,12 +21,10 @@ WORKDIR /emojivoto-build
 COPY . .
 RUN make -C emojivoto-web clean webpack package-web
 
-FROM golang as build-emojivoto-emoji-svc
-FROM golang as build-emojivoto-voting-svc
 FROM golang as build-emojivoto-web
 COPY --from=webpack-bundle /emojivoto-build/emojivoto-web/target/ /emojivoto-build/emojivoto-web/target/
 
-FROM build-$svc_name as build
+FROM build-emojivoto-web as build
 
 # runtime image
 FROM debian:buster-20200514-slim
@@ -42,10 +37,9 @@ RUN apt-get update \
         nghttp2 \
     && rm -rf /var/lib/apt/lists/*
 
-ARG svc_name
-COPY --from=build /emojivoto-build/$svc_name/target/ /usr/local/bin/
+COPY --from=build /emojivoto-build/emojivoto-web/target/ /usr/local/bin/
 
 # ARG variables are not available for ENTRYPOINT
-ENV SVC_NAME $svc_name
+ENV SVC_NAME emojivoto-web
 WORKDIR /usr/local/bin
 ENTRYPOINT $SVC_NAME
