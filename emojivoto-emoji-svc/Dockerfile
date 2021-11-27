@@ -16,6 +16,12 @@ COPY . .
 ARG TARGETARCH
 RUN GOARCH=$TARGETARCH make clean protoc compile
 
+WORKDIR /emojivoto-build
+COPY . .
+
+FROM golang as build-emojivoto-emoji-svc
+FROM build-emojivoto-emoji-svc as build
+
 # runtime image
 FROM debian:buster-20200514-slim
 RUN apt-get update \
