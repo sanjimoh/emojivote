@@ -25,7 +25,7 @@ steps:
 
   - name: 'gcr.io/cloud-builders/kubectl'
     id: emojivoto base GKE deploy
-    args: [ 'apply', '-f', 'kustomize/deployment' ]
+    args: [ 'apply', '-k', 'kustomize/deployment' ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=sanjit-gke-cluster'
