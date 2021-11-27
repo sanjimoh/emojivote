@@ -20,8 +20,8 @@ build: web emoji-svc voting-svc
 
 multi-arch:
 	$(MAKE) -C emojivoto-web build-multi-arch
-	$(MAKE) -C emojivoto-emoji-svc build-multi-arch
-	$(MAKE) -C emojivoto-voting-svc build-multi-arch
+	$(MAKE) -C emojivote-emoji-svc build-multi-arch
+	$(MAKE) -C emojivote-voting-svc build-multi-arch
 
 deploy-to-minikube:
 	$(MAKE) -C emojivoto-web build-container
@@ -39,6 +39,6 @@ deploy-to-docker-compose:
 	docker-compose -f ./docker-compose.yml up -d
 
 push-%:
-	docker push buoyantio/emojivoto-$*:$(IMAGE_TAG)
+	docker push asia-docker.pkg.dev/my-kubernetes-cluster-224712/asia.gcr.io/emojivoto-$*:$(IMAGE_TAG)
 
 push: push-svc-base push-emoji-svc push-voting-svc push-web

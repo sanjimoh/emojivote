@@ -11,7 +11,7 @@ import (
 	"os"
 	"strconv"
 
-	pb "github.com/buoyantio/emojivoto/emojivote-web/gen/proto"
+	pb "github.com/buoyantio/emojivoto/emojivoto-web/gen/proto"
 	"go.opencensus.io/plugin/ochttp"
 )
 
