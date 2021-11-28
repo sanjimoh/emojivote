@@ -5,7 +5,6 @@ go 1.13
 require (
 	contrib.go.opencensus.io/exporter/ocagent v0.6.0
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
-	github.com/golang/protobuf v1.4.0
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
 	github.com/grpc-ecosystem/grpc-gateway v1.14.4 // indirect
 	github.com/prometheus/client_golang v1.6.0
