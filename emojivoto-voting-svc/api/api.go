@@ -49,6 +49,10 @@ func (pS *PollServiceServer) VoteFootprints(_ context.Context, _ *pb.VoteRequest
 	return pS.vote(":footprints:")
 }
 
+func (pS *PollServiceServer) VoteIndiaFlag(_ context.Context, _ *pb.VoteRequest) (*pb.VoteResponse, error) {
+	return pS.vote(":india:")
+}
+
 func (pS *PollServiceServer) VotePoop(_ context.Context, _ *pb.VoteRequest) (*pb.VoteResponse, error) {
 	return pS.vote(":poop:")
 }

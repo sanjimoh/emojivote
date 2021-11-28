@@ -17,6 +17,7 @@ type inMemoryAllEmoji struct {
 }
 
 var topEmoji = []string{
+	":india:",
 	":footprints:",
 	":joy:",
 	":sunglasses:",
