@@ -6,22 +6,27 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     id: emojivoto-web Container Push
     args: [ 'push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}' ]
+    waitFor: ['emojivoto-web Container Build']
 
   - name: 'gcr.io/cloud-builders/docker'
     id: emojivoto-emoji-svc Container Build
     args: [ 'build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}', 'emojivoto-emoji-svc/' ]
+    waitFor: ['-']
 
   - name: 'gcr.io/cloud-builders/docker'
     id: emojivoto-emoji-svc Container Push
     args: [ 'push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}' ]
+    waitFor: ['emojivoto-emoji-svc Container Push']
 
   - name: 'gcr.io/cloud-builders/docker'
     id: emojivoto-voting-svc Container Build
     args: [ 'build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}', 'emojivoto-voting-svc/' ]
+    waitFor: ['-']
 
   - name: 'gcr.io/cloud-builders/docker'
     id: emojivoto-voting-svc Container Push
     args: [ 'push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}' ]
+    waitFor: ['emojivoto-voting-svc Container Build']
 
   - name: 'gcr.io/cloud-builders/kubectl'
     id: emojivoto base GKE deploy
@@ -43,6 +48,7 @@ steps:
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=sanjit-gke-cluster'
+    waitFor: ['emojivoto base GKE deploy']
 
   - name: 'gcr.io/cloud-builders/kubectl'
     id: emojivoto-emoji-svc pod GKE deploy
@@ -57,6 +63,7 @@ steps:
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=sanjit-gke-cluster'
+    waitFor: ['emojivoto base GKE deploy']
 
   - name: 'gcr.io/cloud-builders/kubectl'
     id: emojivoto-voting-svc pod GKE deploy
@@ -71,3 +78,4 @@ steps:
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-south2-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=sanjit-gke-cluster'
+    waitFor: ['emojivoto base GKE deploy']
