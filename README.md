@@ -12,6 +12,8 @@ The application is composed of the following 3 services:
 * [emojivoto-emoji-svc](emojivoto-emoji-svc/): gRPC API for finding and listing emoji
 * [emojivoto-voting-svc](emojivoto-voting-svc/): gRPC API for voting and leaderboard
 
+Demo app is built on top of an existing work available here -> https://github.com/BuoyantIO/emojivoto
+
 ## Demo workflow
 ![Demo workflow](assets/demo_workflow.png "Demo workflow")
 
