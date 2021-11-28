@@ -16,7 +16,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     id: emojivoto-emoji-svc Container Push
     args: [ 'push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}' ]
-    waitFor: ['emojivoto-emoji-svc Container Push']
+    waitFor: ['emojivoto-emoji-svc Container Build']
 
   - name: 'gcr.io/cloud-builders/docker'
     id: emojivoto-voting-svc Container Build
