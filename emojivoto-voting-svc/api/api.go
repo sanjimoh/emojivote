@@ -45,6 +45,10 @@ func (pS *PollServiceServer) VoteDoughnut(_ context.Context, _ *pb.VoteRequest) 
 	return pS.vote(":doughnut:")
 }
 
+func (pS *PollServiceServer) VoteFootprints(_ context.Context, _ *pb.VoteRequest) (*pb.VoteResponse, error) {
+	return pS.vote(":footprints:")
+}
+
 func (pS *PollServiceServer) VotePoop(_ context.Context, _ *pb.VoteRequest) (*pb.VoteResponse, error) {
 	return pS.vote(":poop:")
 }

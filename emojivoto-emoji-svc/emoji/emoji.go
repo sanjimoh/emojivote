@@ -16,7 +16,8 @@ type inMemoryAllEmoji struct {
 	emojiList []*Emoji
 }
 
-var top100Emoji = []string{
+var topEmoji = []string{
+	":footprints:",
 	":joy:",
 	":sunglasses:",
 	":doughnut:",
@@ -134,7 +135,7 @@ func (allEmoji *inMemoryAllEmoji) WithShortcode(shortcode string) *Emoji {
 func NewAllEmoji() AllEmoji {
 	emojiList := make([]*Emoji, 0)
 
-	for _, name := range top100Emoji {
+	for _, name := range topEmoji {
 		e := &Emoji{
 			Unicode:   emojiCodeMap[name],
 			Shortcode: name,

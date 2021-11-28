@@ -4,6 +4,11 @@ all: build
 build: web emoji-svc voting-svc
 push: push-svc-base push-emoji-svc push-voting-svc push-web
 
+clean:
+	$(MAKE) -C emojivoto-web clean
+	$(MAKE) -C emojivoto-emoji-svc clean
+	$(MAKE) -C emojivoto-voting-svc clean
+
 web:
 	$(MAKE) -C emojivoto-web
 
