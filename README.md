@@ -17,3 +17,5 @@ The application is composed of the following 3 services:
 
 ## Sample UI screen
 ![Sample UI screen](assets/sample_ui.png "Sample UI screen")
+
+![Sample UI screen](assets/sample_ui_2.png "Sample UI screen")
