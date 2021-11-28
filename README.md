@@ -1,4 +1,4 @@
-# Emoji vote application
+# GCP gitops demo workflow
 
 Intention of this sample micro-service based application is to quickly onboard on GCP CI/CD pipeline with some 
 meaningful and practical input.
