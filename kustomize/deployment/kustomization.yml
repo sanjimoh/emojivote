@@ -5,5 +5,4 @@ resources:
 - web.yml
 - emoji.yml
 - voting.yml
-- vote-bot.yml
 - ingress.yml
