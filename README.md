@@ -13,3 +13,5 @@ The application is composed of the following 3 services:
 * [emojivoto-voting-svc](emojivoto-voting-svc/): gRPC API for voting and leaderboard
 
 ![Emojivote Topology](assets/emojivote-topology.png "Emojivote Topology")
+
+![Sample UI screen](assets/sample_ui.png "Sample UI screen")
