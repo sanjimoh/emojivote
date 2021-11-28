@@ -19,5 +19,4 @@ Demo app is built on top of an existing work available here -> https://github.co
 
 ## Sample UI screen
 ![Sample UI screen](assets/sample_ui.png "Sample UI screen")
-
 ![Sample UI screen](assets/sample_ui_2.png "Sample UI screen")
