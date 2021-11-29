@@ -36,7 +36,7 @@ spec:
           value: voting-svc.emojivoto:8010
         - name: INDEX_BUNDLE
           value: dist/index_bundle.js
-        image: emojivoto-web:v11
+        image: asia-docker.pkg.dev/my-kubernetes-cluster-224712/asia.gcr.io/emojivoto-web:v11
         name: web-svc
         ports:
         - containerPort: 8080

@@ -32,7 +32,7 @@ spec:
           value: "8020"
         - name: PROM_PORT
           value: "8801"
-        image: emojivoto-emoji-svc:v11
+        image: asia-docker.pkg.dev/my-kubernetes-cluster-224712/asia.gcr.io/emojivoto-emoji-svc:v11
         name: emoji-svc
         ports:
         - containerPort: 8020

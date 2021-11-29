@@ -32,7 +32,7 @@ spec:
           value: "8010"
         - name: PROM_PORT
           value: "8801"
-        image: emojivoto-voting-svc:v11
+        image: asia-docker.pkg.dev/my-kubernetes-cluster-224712/asia.gcr.io/emojivoto-voting-svc:v11
         name: voting-svc
         ports:
         - containerPort: 8010
