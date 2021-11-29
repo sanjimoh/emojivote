@@ -31,13 +31,13 @@ spec:
         - name: GRPC_PORT
           value: "8020"
         - name: PROM_PORT
-          value: "8801"
+          value: "8802"
         image: asia-docker.pkg.dev/my-kubernetes-cluster-224712/asia.gcr.io/emojivoto-emoji-svc:v11
         name: emoji-svc
         ports:
         - containerPort: 8020
           name: grpc
-        - containerPort: 8801
+        - containerPort: 8802
           name: prom
         resources:
           requests:
@@ -56,5 +56,5 @@ spec:
     port: 8020
     targetPort: 8020
   - name: prom
-    port: 8801
-    targetPort: 8801
+    port: 8802
+    targetPort: 8802
