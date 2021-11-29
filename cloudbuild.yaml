@@ -68,7 +68,7 @@ steps:
     waitFor: ['-']
 
   - name: "gcr.io/cloud-builders/gke-deploy"
-    id: namespace GKE deploy
+    id: emojivoto-web ingress GKE deploy
     args:
       - run
       - --filename=deployment/ingress.yml
