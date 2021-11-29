@@ -8,6 +8,16 @@ steps:
     args: [ 'push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}' ]
     waitFor: ['emojivoto-web Container Build']
 
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    id: emojivoto-web pod GKE deploy
+    args:
+      - run
+      - --filename=deployment/web.yml
+      - --image=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}
+      - --location=asia-south2-c
+      - --cluster=sanjit-gke-cluster
+    waitFor: ['emojivoto-web Container Push']
+
   - name: 'gcr.io/cloud-builders/docker'
     id: emojivoto-emoji-svc Container Build
     args: [ 'build', '-t', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}', 'emojivoto-emoji-svc/' ]
@@ -17,6 +27,16 @@ steps:
     id: emojivoto-emoji-svc Container Push
     args: [ 'push', 'asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}' ]
     waitFor: ['emojivoto-emoji-svc Container Build']
+
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    id: emojivoto-emoji-svc pod GKE deploy
+    args:
+      - run
+      - --filename=deployment/emoji.yml
+      - --image=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}
+      - --location=asia-south2-c
+      - --cluster=sanjit-gke-cluster
+    waitFor: ['emojivoto-emoji-svc Container Push']
 
   - name: 'gcr.io/cloud-builders/docker'
     id: emojivoto-voting-svc Container Build
@@ -29,34 +49,31 @@ steps:
     waitFor: ['emojivoto-voting-svc Container Build']
 
   - name: "gcr.io/cloud-builders/gke-deploy"
-    id: emojivoto-web pod GKE deploy
-    args:
-      - run
-      - --filename=deployment/
-      - --image=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}
-      - --location=asia-south2-c
-      - --cluster=sanjit-gke-cluster
-    waitFor: ['emojivoto-web Container Push']
-
-  - name: "gcr.io/cloud-builders/gke-deploy"
-    id: emojivoto-emoji-svc pod GKE deploy
-    args:
-      - run
-      - --filename=deployment/
-      - --image=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}
-      - --location=asia-south2-c
-      - --cluster=sanjit-gke-cluster
-    waitFor: ['emojivoto-emoji-svc Container Push']
-
-  - name: "gcr.io/cloud-builders/gke-deploy"
     id: emojivoto-voting-svc pod GKE deploy
     args:
       - run
-      - --filename=deployment/
+      - --filename=deployment/voting.yml
       - --image=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}
       - --location=asia-south2-c
       - --cluster=sanjit-gke-cluster
     waitFor: ['emojivoto-voting-svc Container Push']
+
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    id: namespace GKE deploy
+    args:
+      - run
+      - --filename=deployment/ns.yml
+      - --location=asia-south2-c
+      - --cluster=sanjit-gke-cluster
+    waitFor: ['-']
+
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    id: namespace GKE deploy
+    args:
+      - run
+      - --filename=deployment/ingress.yml
+      - --location=asia-south2-c
+      - --cluster=sanjit-gke-cluster
 
 #  - name: 'gcr.io/cloud-builders/kubectl'
 #    id: emojivoto base GKE deploy
