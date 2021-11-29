@@ -32,28 +32,31 @@ steps:
     id: emojivoto-web pod GKE deploy
     args:
       - run
-      - --filename=kustomize/deployment/
+      - --filename=deployment/
       - --image=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-web:${SHORT_SHA}
       - --location=asia-south2-c
       - --cluster=sanjit-gke-cluster
+    waitFor: ['emojivoto-web Container Push']
 
   - name: "gcr.io/cloud-builders/gke-deploy"
     id: emojivoto-emoji-svc pod GKE deploy
     args:
       - run
-      - --filename=kustomize/deployment/
+      - --filename=deployment/
       - --image=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-emoji-svc:${SHORT_SHA}
       - --location=asia-south2-c
       - --cluster=sanjit-gke-cluster
+    waitFor: ['emojivoto-emoji-svc Container Push']
 
   - name: "gcr.io/cloud-builders/gke-deploy"
     id: emojivoto-voting-svc pod GKE deploy
     args:
       - run
-      - --filename=kustomize/deployment/
+      - --filename=deployment/
       - --image=asia-docker.pkg.dev/${PROJECT_ID}/asia.gcr.io/emojivoto-voting-svc:${SHORT_SHA}
       - --location=asia-south2-c
       - --cluster=sanjit-gke-cluster
+    waitFor: ['emojivoto-voting-svc Container Push']
 
 #  - name: 'gcr.io/cloud-builders/kubectl'
 #    id: emojivoto base GKE deploy
